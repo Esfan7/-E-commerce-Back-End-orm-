@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
+const sequelize = require('../../config/connection');
 
 // The `/api/categories` endpoint
 
@@ -60,10 +61,17 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try{
-    const result = await Category.destroy({
-      where: {id: req.params.id}
-    });
+
+const result = await Category.destroy({
+  where: {id: req.params.id}
+});
+
+
+
     res.json(result);
+
+  
+  
 
   } catch (err){
     console.log(err)
